@@ -1,58 +1,32 @@
 package main
 
-import (
-	"fmt"
-	"os"
-)
+import "fmt"
 
 func main() {
-	nums := []int{1,1,1,0,0,0,1,1,1,1,0}
+	// nums := []int{1,1,1,0,0,0,1,1,1,1,0}
+	nums := []int{1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0}
 	k := 2
 	result := longestOnes(nums, k)
+	fmt.Println("The max num of consecutive ones is:", result)
 }
 
 func longestOnes(nums []int, k int) int {
-	start := 0
-	end := k-1
-	numConsecutiveOnes := 0
-	maxNumConsecutiveOnes := 0
-	numFlipped := 0
-	flippedArr := make([]bool, len(nums))
-	
-	for end < len(nums) {
-		for numFlipped < 5 {
-			
-		}
-		if start == 0 {
-			for i := start; i <= end; i++ {
-				if nums[i] == 0 {
-					numFlipped++
-					flippedArr[i] = true
-					numConsecutiveOnes++
-				} else if nums[i] == 1 {
-					numConsecutiveOnes++
-				} else {
-					fmt.Println("Error! Value is neither 1 or 0")
-					os.Exit(1)
-				}
-			}
-		} else {
-			if nums[end] == 0 && numFlipped < k {
-				numFlipped++
-				flippedArr[end] = true
-				numConsecutiveOnes++
-			} else if nums[end] == 1 {
-				numConsecutiveOnes++
-			} else if nums[end] == 0 && numFlipped >= k {
-				
-			}
-			
-		}
-		if numConsecutiveOnes > maxNumConsecutiveOnes {
-			maxNumConsecutiveOnes = numConsecutiveOnes
-		}
+	left, right := 0, 0
 
-		start++
-		end++
+	for right < len(nums) {
+		if nums[right] == 0 {
+			k--
+		}
+		right++
+		if k < 0 {
+			if nums[left] == 0{
+				k++
+			}
+			left++
+		}
+		fmt.Println("left:", left)
+		fmt.Println("right:", right)
+		fmt.Println("k:", k)
 	}
+	return right - left 
 }
