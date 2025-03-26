@@ -1,4 +1,4 @@
-package leetcode
+package main
 
 // TreeNode represents a binary tree node
 type TreeNode struct {
